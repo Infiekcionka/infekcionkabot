@@ -1,8 +1,6 @@
 require('dotenv').config();
 const Markup = require('telegraf/markup');
-const {
-	Telegraf
-} = require('telegraf');
+const { Telegraf } = require('telegraf');
 const mogilev = require('./statistics/mogilev');
 const gomel = require('./statistics/gomel');
 const grodno = require('./statistics/grodno');
@@ -23,13 +21,13 @@ bot.start((ctx) =>
 
 `,
 		Markup.keyboard([
-			['Минск'],
-			['Минская', 'Витебская'],
-			['Могилёвская', 'Гомельская'],
-			['Брестская', 'Гродненская']
+			[ 'Минск' ],
+			[ 'Минская', 'Витебская' ],
+			[ 'Могилёвская', 'Гомельская' ],
+			[ 'Брестская', 'Гродненская' ]
 		])
-		.resize()
-		.extra()
+			.resize()
+			.extra()
 	)
 );
 
@@ -41,5 +39,12 @@ bot.hears('Гродненская', (ctx) => ctx.reply(grodno));
 bot.hears('Брестская', (ctx) => ctx.reply(brest));
 bot.hears('Витебская', (ctx) => ctx.reply(vitebsk));
 bot.hears('Минск', (ctx) => ctx.reply(minsk));
+
+bot.catch((err, ctx) => {
+	console.log(`Упс! Произошла ошибка ${ctx.updateType}`, err);
+});
+bot.start((ctx) => {
+	throw new Error('Example error');
+});
 
 bot.launch();
