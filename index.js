@@ -1,8 +1,6 @@
 require('dotenv').config();
 const Markup = require('telegraf/markup');
-const {
-	Telegraf
-} = require('telegraf');
+const { Telegraf } = require('telegraf');
 const mogilev = require('./statistics/mogilev');
 const gomel = require('./statistics/gomel');
 const grodno = require('./statistics/grodno');
@@ -23,24 +21,24 @@ bot.start((ctx) =>
 
 `,
 		Markup.keyboard([
-			['Статистика Минздрава'],
-			['Минская', 'Витебская'],
-			['Могилёвская', 'Гомельская'],
-			['Брестская', 'Гродненская']
+			[ 'Статистика Минздрава' ],
+			[ 'Минская', 'Витебская' ],
+			[ 'Могилёвская', 'Гомельская' ],
+			[ 'Брестская', 'Гродненская' ]
 		])
-		.resize()
-		.extra()
+			.resize()
+			.extra()
 	)
 );
 
 bot.on('sticker', (ctx) => ctx.reply('👍'));
 bot.hears('Могилёвская', (ctx) => ctx.reply(mogilev));
-bot.hears('Статистика Минздрава', (ctx) => ctx.reply(minskaya));
+bot.hears('Минская', (ctx) => ctx.reply(minskaya));
 bot.hears('Гомельская', (ctx) => ctx.reply(gomel));
 bot.hears('Гродненская', (ctx) => ctx.reply(grodno));
 bot.hears('Брестская', (ctx) => ctx.reply(brest));
 bot.hears('Витебская', (ctx) => ctx.reply(vitebsk));
-bot.hears('Минск', (ctx) => ctx.reply(minsk));
+bot.hears('Статистика Минздрава', (ctx) => ctx.reply(minsk));
 
 bot.catch((err, ctx) => {
 	console.log(`Упс! Произошла ошибка ${ctx.updateType}`, err);
